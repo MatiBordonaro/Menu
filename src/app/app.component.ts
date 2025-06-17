@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'Menu';
+  title = "Menú";
+  logo = "img/logo2.png";
 }

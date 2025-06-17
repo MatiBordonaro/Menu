@@ -1,0 +1,23 @@
+<div class="container my-5">
+  <div class="row g-4 justify-content-center">
+    @for (food of foods; track food.name) {
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="card border shadow-sm"
+              [ngClass]="{
+                'bg-white border-success': food.stock > 0,
+                'bg-dark text-white': food.stock == 0
+              }">
+            <img src="{{food.image}}" class="card-img-top" alt="{{food.name}}">
+            <div class="card-body">
+              <h5 class="card-title text-danger">{{food.name | uppercase}}</h5>
+              <p class="card-text text-secondary">{{food.type}}</p>
+              <p class="card-text fs-4 fw-bold text-danger">{{food.price | currency}}</p>
+
+
+            </div>
+        </div>
+      </div>
+    }
+
+  </div>
+</div>
