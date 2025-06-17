@@ -51,19 +51,9 @@ export class FoodListComponent {
       quantity: 0
     }
   ];
-
-  downQuantity(food: Food): void {
-    if(food.quantity > 0)
-      food.quantity--;
-  }
-
-  upQuantity(food: Food): void {
-    if(food.quantity < food.stock)
-      food.quantity++;
-  }
-
-  onChangeQuantity(event: Event, food: Food): void{
-    console.log(event)
-  }
   
+  maxReached(m: string){
+    alert(m);
+  }
+
 }
