@@ -12,8 +12,16 @@
               <h5 class="card-title text-danger">{{food.name | uppercase}}</h5>
               <p class="card-text text-secondary">{{food.type}}</p>
               <p class="card-text fs-4 fw-bold text-danger">{{food.price | currency}}</p>
-
-
+              @if (food.stock > 0) {
+                <div class="d-flex align-items-center gap-2 mb-2">
+                <button class="btn btn-sm btn-outline-danger" (click)="downQuantity(food)">−</button>
+                <input class="form-control form-control-sm w-25" type="number" [(ngModel)]="food.quantity">
+                <button class="btn btn-sm btn-outline-primary" (click)="upQuantity(food)">+</button>
+                </div>
+                <button class="btn btn-danger">🍔 ¡Pedir!</button>
+              } @else {
+                <p>SIN STOCK</p>
+              }
             </div>
         </div>
       </div>

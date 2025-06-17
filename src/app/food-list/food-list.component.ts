@@ -52,5 +52,14 @@ export class FoodListComponent {
     }
   ];
 
+  downQuantity(food: Food): void {
+    if(food.quantity > 0)
+      food.quantity--;
+  }
 
+  upQuantity(food: Food): void {
+    if(food.quantity < food.stock)
+      food.quantity++;
+  }
+  
 }
