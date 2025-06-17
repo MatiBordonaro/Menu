@@ -61,5 +61,9 @@ export class FoodListComponent {
     if(food.quantity < food.stock)
       food.quantity++;
   }
+
+  onChangeQuantity(event: Event, food: Food): void{
+    console.log(event)
+  }
   
 }
