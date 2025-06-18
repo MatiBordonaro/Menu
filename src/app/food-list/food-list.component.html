@@ -15,7 +15,7 @@
               @if (food.stock > 0) {
                 <app-input-integer [(quantity)]="food.quantity" [max]="food.stock" (maxReached)="maxReached($event)"></app-input-integer>
                 {{food.quantity}}
-                <button class="btn btn-danger">🍔 ¡Pedir!</button>
+                <button class="btn btn-danger" (click)="addToCart(food)">🍔 ¡Pedir!</button>
               } @else {
                 <p>SIN STOCK</p>
               }

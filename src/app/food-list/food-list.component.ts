@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Food } from './Food';
+import { FoodCartService } from '../food-cart.service';
 
 @Component({
   selector: 'app-food-list',
@@ -8,7 +9,6 @@ import { Food } from './Food';
   styleUrl: './food-list.component.scss'
 })
 export class FoodListComponent {
-  
   foods: Food[] = [ 
     {
       name: "Hamburguesa",
@@ -51,9 +51,17 @@ export class FoodListComponent {
       quantity: 0
     }
   ];
+
+
+  constructor(private foodCart: FoodCartService){}
   
   maxReached(m: string){
     alert(m);
   }
 
+  addToCart(food: Food): void{
+    this.foodCart.addToCart(food);
+    food.stock -= food.quantity
+    food.quantity = 0;
+  }
 }
