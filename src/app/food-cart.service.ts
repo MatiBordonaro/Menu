@@ -20,8 +20,7 @@ export class FoodCartService {
     } else {
       item.quantity += food.quantity;
     }
-    console.log(this._cartList);
-    this.cartList.next(this._cartList);
+    this.cartList.next(this._cartList); //emite evento
   }
 
 }

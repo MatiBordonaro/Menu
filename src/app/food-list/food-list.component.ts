@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Food } from './Food';
 import { FoodCartService } from '../food-cart.service';
+import { FilterService } from '../filter.service';
 
 @Component({
   selector: 'app-food-list',
@@ -8,11 +9,13 @@ import { FoodCartService } from '../food-cart.service';
   templateUrl: './food-list.component.html',
   styleUrl: './food-list.component.scss'
 })
+
+
 export class FoodListComponent {
   foods: Food[] = [ 
     {
       name: "Hamburguesa",
-      type: "Plato principal",
+      type: "Comida",
       price: 12,
       stock: 0,
       image: "img/hambur.jpg",
@@ -20,7 +23,7 @@ export class FoodListComponent {
     },
     {
       name: "Pancho",
-      type: "Plato principal",
+      type: "Comida",
       price: 8,
       stock: 10,
       image: "img/pancho.jpg",
@@ -28,7 +31,7 @@ export class FoodListComponent {
     },
     {
       name: "Papas fritas",
-      type: "Entrada",
+      type: "Comida",
       price: 6,
       stock: 50,
       image: "img/papas.jpeg",
@@ -52,8 +55,20 @@ export class FoodListComponent {
     }
   ];
 
+  filteredFoods: Food[] = [];
 
-  constructor(private foodCart: FoodCartService){}
+  constructor(private foodCart: FoodCartService, private filter: FilterService){}
+
+  ngOnInit(){
+    this.filter.type$.subscribe(newFilter => {
+      if(newFilter === 'Todas'){
+        this.filteredFoods = this.foods;
+      } else {
+        this.filteredFoods =  this.foods.filter(food => food.type === newFilter);
+      } //filter en amarillo es una función propia de js, crea un array con los 
+        //elementos que cumplan la condicion. Cada food dentro de filter es un elemento de foods.
+    })
+  }
   
   maxReached(m: string){
     alert(m);
@@ -64,4 +79,5 @@ export class FoodListComponent {
     food.stock -= food.quantity
     food.quantity = 0;
   }
+
 }
