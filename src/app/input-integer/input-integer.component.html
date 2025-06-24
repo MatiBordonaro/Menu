@@ -1,9 +1,11 @@
 <div class="d-flex align-items-center gap-2 mb-2">
     <button class="btn btn-sm btn-outline-danger" (click)="downQuantity()">−</button>
+    @if (showInput) {
     <input 
         class="form-control form-control-sm w-25" 
         type="number" 
         [(ngModel)]="quantity"
         (keyup)="onChangeQuantity($event)">
+    }
     <button class="btn btn-sm btn-outline-primary" (click)="upQuantity()">+</button>
 </div>

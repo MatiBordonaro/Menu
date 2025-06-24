@@ -10,6 +10,9 @@ export class InputIntegerComponent {
   constructor() {}
 
   @Input()
+  showInput: boolean = true;
+
+  @Input()
   quantity: number = 0;
 
   @Output()

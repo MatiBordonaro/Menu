@@ -1,6 +1,22 @@
-<h3>Carrito de compras</h3>
-<ul>
-    @for(food of cartList$ | async; track food.name){
-        <li>{{food.name}}: {{food.quantity}}</li>
+<div class="my-5">
+  <div>
+    @for(food of cartList$ | async; track food.name) {
+      <div class="card shadow-sm p-2 d-flex align-items-start gap-2 mb-2">
+        <div>
+            <img [src]="food.image"
+             [alt]="food.name"
+             class="rounded"
+             style="width: 40px; height: 40px; object-fit: cover;">
+            <p class="mb-0 text-muted small">x{{ food.quantity }}</p>
+        </div>
+        <div>
+            <span class="fw-semibold small">{{ food.name }}</span>
+            <span class="badge bg-primary">${{ food.price * food.quantity }}</span>
+        </div>
+        <div>
+          <app-input-integer class="btn btn-sm w-50" [showInput]="false"></app-input-integer>
+        </div>
+      </div>
     }
-</ul>
+  </div>
+</div>
