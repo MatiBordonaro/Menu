@@ -44,9 +44,13 @@ export class FoodListComponent {
   }
 
   addToCart(food: Food): void{
-    this.foodCart.addToCart(food);
-    food.stock -= food.quantity
-    food.quantity = 0;
+    if(food.quantity > 0){
+      this.foodCart.addToCart(food);
+      food.stock -= food.quantity
+      food.quantity = 0;
+    } else {
+      alert('para pedir debe seleccionar al menos 1');
+    }
   }
 
   applyFilter(type: string){

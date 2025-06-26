@@ -39,7 +39,7 @@ export class InputIntegerComponent {
     if(this.quantity > 0) {
       this.quantity--;
       this.quantityChange.emit(this.quantity)
-      this.decreased.emit();
+      this.decreased.emit(); //especificamente para eliminar del carrito
     }
 
   }
@@ -54,8 +54,17 @@ export class InputIntegerComponent {
   }
 
   onChangeQuantity(event: Event): void {
-    console.log(event)
-    this.quantityChange.emit(this.quantity);
+    // console.log((event.target as HTMLInputElement).value)
+    const value = (event.target as HTMLInputElement).value
+    if(Number(value) > this.max){
+      this.quantity = 0;
+      alert('el máximo de este producto es de ' + this.max);
+    } else if (Number(value) < 0) {
+      this.quantity = 0;
+      alert('no puede comprar comida negativa!!');
+    } else {
+      this.quantityChange.emit(this.quantity);
+    }
   }
   
 }

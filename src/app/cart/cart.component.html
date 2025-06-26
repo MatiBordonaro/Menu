@@ -1,7 +1,7 @@
 <div class="my-5">
   <div>
     @for(food of cartList$ | async; track food.name) {
-      <div class="card shadow-sm p-2 d-flex align-items-start gap-2 mb-2">
+      <div *ngIf="food.quantity > 0" class="card shadow-sm p-2 d-flex align-items-start gap-2 mb-2">
         <div>
             <img [src]="food.image"
              [alt]="food.name"
@@ -21,7 +21,6 @@
             (decreased)="returnToStock(food)"
         ></app-input-integer>
       </div>
-      {{food.stock}}
-    }
+    }   
   </div>
 </div>
