@@ -32,8 +32,11 @@ export class FoodListComponent {
     //se suscribe al getAll() que trae un observable 
     // y carga f que son las foods de la API en el foods local
 
-    //FILTRAR
+    //ESCUCHA SI SE INDICA UN NUEVO FILTRA
     this.filter.type$.subscribe(newFilter => this.applyFilter(newFilter));
+
+    //ESCUCHA SI HAY PARA DEVOLVER UNA FOOD DESDE EL CARRITO
+    this.foodCart.returnedFood.subscribe(returned => this.updateStock(returned));
   }
   
   maxReached(m: string){
@@ -56,9 +59,14 @@ export class FoodListComponent {
       //elementos que cumplan la condicion. Cada food dentro de filter es un elemento de foods
   }
 
-  // updateStock(food: Food){
-  //   this.foodCart.cartList
-  // }
+  updateStock(returnedFood: Food){
+    const matchFood = this.filteredFoods.find(f => f.name === returnedFood.name);
+    if(matchFood){ //&& returnedFood.quantity no lo hago porque ya se maneja en inputInteger
+      matchFood.stock++;
+      // returnedFood.quantity--;
+      //no resto de quantity porque ya lo hace el botón
+    }
+  }
 
 
 

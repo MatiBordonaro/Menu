@@ -7,6 +7,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class FoodCartService {
 
+  private _returnedFood: Food = {} as Food;
+  returnedFood: BehaviorSubject<Food> = new BehaviorSubject(this._returnedFood);
   private _cartList: Food[] = [];
   cartList: BehaviorSubject<Food[]> = new BehaviorSubject<Food[]>([]);
 
@@ -23,10 +25,8 @@ export class FoodCartService {
     this.cartList.next(this._cartList); //emite evento
   }
 
-  // returnToStock(food: Food){
-  //   if(food){
-  //     this.cartList.next(this._cartList); 
-  //   }
-  // }
+  returnToStock(food: Food){
+    this.returnedFood.next(food);
+  }
 
 }

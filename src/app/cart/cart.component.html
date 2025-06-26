@@ -18,8 +18,8 @@
             [(quantity)]="food.quantity"
             [showInput]="false" 
             [showBtnAdd]="false"
-            ></app-input-integer>
-            <!-- (decreased)="returnToStock(food)" -->
+            (decreased)="returnToStock(food)"
+        ></app-input-integer>
       </div>
       {{food.stock}}
     }
