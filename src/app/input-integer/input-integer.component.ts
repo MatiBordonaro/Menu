@@ -9,8 +9,17 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class InputIntegerComponent {
   constructor() {}
 
+  //para mostrar o no mostrar los botones o el input de la botonera
+  //por defecto se muestran todos
   @Input()
   showInput: boolean = true;
+  @Input()
+  showBtnAdd: boolean = true;
+  @Input()
+  showBtnSubtract: boolean = true;
+
+  @Output()
+  decreased: EventEmitter<number> = new EventEmitter<number>();
 
   @Input()
   quantity: number = 0;
@@ -30,6 +39,7 @@ export class InputIntegerComponent {
     if(this.quantity > 0) {
       this.quantity--;
       this.quantityChange.emit(this.quantity)
+      this.decreased.emit();
     }
 
   }

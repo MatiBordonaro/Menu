@@ -16,4 +16,8 @@ export class CartComponent {
     this.cartList$ = foodCart.cartList.asObservable();
   }
 
+  // returnToStock(food: Food){
+  //   this.foodCart.returnToStock(food);
+  // }
+
 }

@@ -10,13 +10,18 @@
             <p class="mb-0 text-muted small">x{{ food.quantity }}</p>
         </div>
         <div>
-            <span class="fw-semibold small">{{ food.name }}</span>
+            <span class="fw-semibold small">{{ food.name }} </span>
             <span class="badge bg-primary">${{ food.price * food.quantity }}</span>
         </div>
-        <div>
-          <app-input-integer class="btn btn-sm w-50" [showInput]="false"></app-input-integer>
-        </div>
+        <app-input-integer 
+            class="btn btn-sm w-50 m-0 p-0"
+            [(quantity)]="food.quantity"
+            [showInput]="false" 
+            [showBtnAdd]="false"
+            ></app-input-integer>
+            <!-- (decreased)="returnToStock(food)" -->
       </div>
+      {{food.stock}}
     }
   </div>
 </div>

@@ -23,4 +23,10 @@ export class FoodCartService {
     this.cartList.next(this._cartList); //emite evento
   }
 
+  // returnToStock(food: Food){
+  //   if(food){
+  //     this.cartList.next(this._cartList); 
+  //   }
+  // }
+
 }
