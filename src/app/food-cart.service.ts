@@ -26,7 +26,11 @@ export class FoodCartService {
   }
 
   returnToStock(food: Food){
-    this.returnedFood.next(food);
+    this.returnedFood.next(food)
+    if(food.quantity == 0){
+      this._cartList = this._cartList.filter(f => f.name !== food.name);
+      this.cartList.next(this._cartList);
+    };
   }
 
   //para cuando se navega hacia otro componente, el valor viejo de returnedFood 
@@ -35,4 +39,12 @@ export class FoodCartService {
     this.returnedFood.next({} as Food);
   }
 
+  calculateTotal(): number {
+    let total = 0;
+    for(let i=0; i < this._cartList.length; i++){
+      let f = this._cartList[i];
+      total += f.price * f.quantity;
+    }
+    return total;
+  }
 }

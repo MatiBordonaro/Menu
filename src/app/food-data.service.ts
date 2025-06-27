@@ -31,10 +31,4 @@ export class FoodDataService {
     this.loadAll();
     return this.foods$.asObservable();
   }
-
-  // public getAll(): Observable<Food[]>{
-  //   return this.http.get<Food[]>(URL)
-  //           .pipe(tap( (foods: Food[]) => foods.forEach(food => food.quantity = 0) )
-  //           )
-  // }
 }

@@ -22,5 +22,9 @@
         ></app-input-integer>
       </div>
     }   
+    <div *ngIf="hasFoods" class="border rounded bg-light text-dark mb-2 shadow-sm">
+      <p class="mb-2 fw-semibold">Total: <span class="text-success">{{calculateTotal()}}</span></p>
+      <button class="btn btn-primary w-100">COMPRAR</button>
+    </div>
   </div>
 </div>
