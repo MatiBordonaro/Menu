@@ -3,6 +3,7 @@ import { Food } from './Food';
 import { FoodCartService } from '../food-cart.service';
 import { FilterService } from '../filter.service';
 import { FoodDataService } from '../food-data.service';
+import { Subscription, take } from 'rxjs';
 
 @Component({
   selector: 'app-food-list',
@@ -16,6 +17,13 @@ export class FoodListComponent {
   foods: Food[] = [];
   filteredFoods: Food[] = [];
 
+  //subscripciones
+  private foodsSub!: Subscription;
+  private filterSub!: Subscription;
+  private returnedFoodSub!: Subscription;
+
+
+
   constructor(
     private foodCart: FoodCartService, 
     private filter: FilterService,
@@ -24,19 +32,28 @@ export class FoodListComponent {
 
   ngOnInit(){
     //TRAER COMIDAS
-    this.foodData.getAll().subscribe(f => {
-      this.foods = f;
-      this.applyFilter('Todas')
+    this.foodsSub = 
+      this.foodData.getFoods().subscribe(f => {
+        this.foods = f;
+        this.applyFilter('Todas')
       //inicializo el filtro en todas, para que se muestren todas por defecto
     });
     //se suscribe al getAll() que trae un observable 
     // y carga f que son las foods de la API en el foods local
 
     //ESCUCHA SI SE INDICA UN NUEVO FILTRA
-    this.filter.type$.subscribe(newFilter => this.applyFilter(newFilter));
+    this.filterSub =
+      this.filter.type$.subscribe(newFilter => this.applyFilter(newFilter));
 
     //ESCUCHA SI HAY PARA DEVOLVER UNA FOOD DESDE EL CARRITO
-    this.foodCart.returnedFood.subscribe(returned => this.updateStock(returned));
+    this.returnedFoodSub = 
+      this.foodCart.returnedFood.subscribe(returned => this.updateStock(returned));
+  }
+
+  ngOnDestroy(){
+    this.foodsSub.unsubscribe();
+    this.filterSub.unsubscribe();
+    this.returnedFoodSub.unsubscribe();
   }
   
   maxReached(m: string){
@@ -67,6 +84,7 @@ export class FoodListComponent {
     const matchFood = this.filteredFoods.find(f => f.name === returnedFood.name);
     if(matchFood){ //&& returnedFood.quantity no lo hago porque ya se maneja en inputInteger
       matchFood.stock++;
+      this.foodCart.clearReturnedFood();
       // returnedFood.quantity--;
       //no resto de quantity porque ya lo hace el botón
     }

@@ -29,4 +29,10 @@ export class FoodCartService {
     this.returnedFood.next(food);
   }
 
+  //para cuando se navega hacia otro componente, el valor viejo de returnedFood 
+  // queda guardado y se devuelve al stock cada vez que
+  clearReturnedFood(){
+    this.returnedFood.next({} as Food);
+  }
+
 }
