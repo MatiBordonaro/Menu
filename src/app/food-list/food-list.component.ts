@@ -81,7 +81,7 @@ export class FoodListComponent {
   }
 
   updateStock(returnedFood: Food){
-    const matchFood = this.filteredFoods.find(f => f.name === returnedFood.name);
+    const matchFood = this.foods.find(f => f.name === returnedFood.name);
     if(matchFood){ //&& returnedFood.quantity no lo hago porque ya se maneja en inputInteger
       matchFood.stock++;
       this.foodCart.clearReturnedFood();
