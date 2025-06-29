@@ -8,8 +8,7 @@ import { FilterService } from './filter.service';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = "Menú";
-  logo = "img/logo2.png";
+  headerImg = "header.png";
   
   //estos dos son para detalles de los botones del nav, no para lógica para filtrar
   typeSelected = 'Todas'; 

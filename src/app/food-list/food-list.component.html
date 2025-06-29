@@ -7,7 +7,7 @@
                 'bg-white border-success': food.stock > 0,
                 'bg-dark text-white': food.stock == 0
               }">
-            <img src="{{food.image}}" class="card-img-top" alt="{{food.name}}">
+            <img src="{{food.image}}" class="card-img-top img-fixed" alt="{{food.name}}">
             <div class="card-body">
               <h5 class="card-title text-danger">{{food.name | uppercase}}</h5>
               <p class="card-text text-secondary">{{food.type}}</p>
