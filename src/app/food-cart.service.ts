@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Food } from './food-list/Food';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class FoodCartService {
   private _returnedFood: Food = {} as Food;
   returnedFood: BehaviorSubject<Food> = new BehaviorSubject(this._returnedFood);
   private _cartList: Food[] = [];
-  cartList: BehaviorSubject<Food[]> = new BehaviorSubject<Food[]>([]);
+  cartList$: BehaviorSubject<Food[]> = new BehaviorSubject<Food[]>([]);
 
   constructor() { }
 
@@ -22,14 +22,14 @@ export class FoodCartService {
     } else {
       item.quantity += food.quantity;
     }
-    this.cartList.next(this._cartList); //emite evento
+    this.cartList$.next(this._cartList); //emite evento
   }
 
   returnToStock(food: Food){
     this.returnedFood.next(food)
     if(food.quantity == 0){
       this._cartList = this._cartList.filter(f => f.name !== food.name);
-      this.cartList.next(this._cartList);
+      this.cartList$.next(this._cartList);
     };
   }
 
@@ -46,5 +46,14 @@ export class FoodCartService {
       total += f.price * f.quantity;
     }
     return total;
+  }
+
+  getCurrentCart(): Food[]{
+    return [ ... this._cartList];
+  }
+
+  clearCart(){
+    this._cartList = [];
+    this.cartList$.next([]);
   }
 }

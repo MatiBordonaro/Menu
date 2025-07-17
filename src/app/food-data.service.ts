@@ -31,4 +31,21 @@ export class FoodDataService {
     this.loadAll();
     return this.foods$.asObservable();
   }
+
+  updateStock(id: string, newStock: number): Observable<Food> {
+    return this.http.put<Food>(`${URL}/${id}`, { stock: newStock });
+  }
+
+  // public updateFoods(food: Food): Observable<Food>{
+  //   return this.http.put<Food>(`${URL}/${food.id}`, food).
+  //           pipe(
+  //             tap(updatedFood => {
+  //               let index = this._foods.findIndex(f => f.id === updatedFood.id);
+  //               if(index){
+  //                 this._foods[index] = updatedFood;
+  //                 this.foods$.next(this._foods);
+  //               }
+  //             })
+  //           )
+  // }
 }
