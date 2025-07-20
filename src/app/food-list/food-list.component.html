@@ -14,12 +14,12 @@
               <p class="card-text fs-4 fw-bold text-danger">{{food.price | currency}}</p>
               @if (food.stock > 0) {
                 <app-input-integer [(quantity)]="food.quantity" [max]="food.stock" (maxReached)="maxReached($event)"></app-input-integer>
-                {{food.quantity}}
                 <button class="btn btn-danger" (click)="addToCart(food)">🍔 ¡Pedir!</button>
               } @else {
                 <p>SIN STOCK</p>
               }
-<p>{{food.stock}}</p>
+              <!-- solo para fines de prueba -->
+            <p class="fs-6 text-muted fst-italic">stock: {{food.stock}}</p>
             </div>
         </div>
       </div>

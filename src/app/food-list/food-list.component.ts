@@ -38,10 +38,9 @@ export class FoodListComponent {
         this.applyFilter('Todas')
       //inicializo el filtro en todas, para que se muestren todas por defecto
     });
-    //se suscribe al getAll() que trae un observable 
-    // y carga f que son las foods de la API en el foods local
+    //se suscribe al getFoods() que trae un observable y carga f que son las foods de la API en el foods local
 
-    //ESCUCHA SI SE INDICA UN NUEVO FILTRA
+    //ESCUCHA SI SE INDICA UN NUEVO FILTRO
     this.filterSub =
       this.filter.type$.subscribe(newFilter => this.applyFilter(newFilter));
 

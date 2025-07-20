@@ -27,16 +27,16 @@ export class FoodCartService {
 
   returnToStock(food: Food){
     this.returnedFood.next(food)
-    if(food.quantity == 0){
+    if(food.quantity == 0){ //si la cantidad del producto a devolver llegó a 0
+      //filtro y lleno el carrito nuevamente con los que NO SEAN la comida a devolver, es decir la borro del carrito
       this._cartList = this._cartList.filter(f => f.name !== food.name);
       this.cartList$.next(this._cartList);
     };
   }
 
-  //para cuando se navega hacia otro componente, el valor viejo de returnedFood 
-  // queda guardado y se devuelve al stock cada vez que
   clearReturnedFood(){
     this.returnedFood.next({} as Food);
+  
   }
 
   calculateTotal(): number {
@@ -49,6 +49,7 @@ export class FoodCartService {
   }
 
   getCurrentCart(): Food[]{
+    //lo devuelvo pero como arreglo
     return [ ... this._cartList];
   }
 

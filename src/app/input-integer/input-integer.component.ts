@@ -54,7 +54,6 @@ export class InputIntegerComponent {
   }
 
   onChangeQuantity(event: Event): void {
-    // console.log((event.target as HTMLInputElement).value)
     const value = (event.target as HTMLInputElement).value
     if(Number(value) > this.max){
       this.quantity = 0;

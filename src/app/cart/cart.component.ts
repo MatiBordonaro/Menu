@@ -60,15 +60,14 @@ export class CartComponent {
   //LO REFORMULÉ A ESTA MANERA PORQUE LA DE ARRIBA TENÍA PROBLEMAS DE SINCRONIZACIÓN
   async makePurchase() {
   //obtengo el carrito una sola vez
-  const cartFoods = await firstValueFrom(this.cartList$.pipe(take(1)));
+  //firstValueFrom me transforma el observable a promesa, para así poder tener sincronizado los datos
+  const cartFoods = await firstValueFrom(this.cartList$);
 
   //por cada ítem, espero a que la petición termine (o falle) y se aborte al primer error
   for (const item of cartFoods) {
     const newStock = item.stock - item.quantity;
     try {
-      const updated = await firstValueFrom(
-        this.foodData.updateStock(item.id, newStock).pipe(take(1))
-      );
+      const updated = await firstValueFrom(this.foodData.updateStock(item.id, newStock));
       console.log(`Stock de ${updated.name} actualizado de ${item.stock} a ${updated.stock}`);
     } 
     catch (err) {

@@ -15,7 +15,7 @@ export class FoodDataService {
 
   constructor(private http: HttpClient) { }
 
-  public loadAll(): void {
+  private loadAll(): void {
     if(this._foods.length === 0){
       this.http.get<Food[]>(URL)
           .pipe(
